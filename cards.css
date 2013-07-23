@@ -1,0 +1,165 @@
+.card{
+        width:150px;
+        height:210px;
+        background-image: url(images/cards.svg);
+        background-repeat:no-repeat;
+	background-position: -7 -862; 
+}
+.ace-hearts {
+        background-position: -7 -7;
+}
+.two-hearts {
+        background-position:-162 -7;
+}
+.three-hearts {
+        background-position:-317 -7;
+}
+.four-hearts {
+        background-position:-472 -7;
+}
+.five-hearts {
+        background-position:-627 -7;
+}
+.six-hearts {
+        background-position:-782 -7;
+}
+.seven-hearts {
+        background-position:-937 -7;
+}
+.eight-hearts {
+        background-position:-1092 -7;
+}
+.nine-hearts {
+        background-position:-1247 -7;
+}
+.ten-hearts {
+        background-position:-1402 -7;
+}
+.jack-hearts {
+        background-position:-1557 -7;
+}
+.queen-hearts {
+        background-position:-1712 -7;
+}
+.king-hearts {
+        background-position:-1867 -7;
+}
+.ace-spades {
+        background-position: -7 -222;
+}
+.two-spades {
+        background-position:-162 -222;
+}
+.three-spades {
+        background-position:-317 -222;
+}
+.four-spades {
+        background-position:-472 -222;
+}
+.five-spades {
+        background-position:-627 -222;
+}
+.six-spades {
+        background-position:-782 -222;
+}
+.seven-spades {
+        background-position:-937 -222;
+}
+.eight-spades {
+        background-position:-1092 -222;
+}
+.nine-spades {
+        background-position:-1247 -222;
+}
+.ten-spades {
+        background-position:-1402 -222;
+}
+.jack-spades {
+        background-position:-1557 -222;
+}
+.queen-spades {
+        background-position:-1712 -222;
+}
+.king-spades {
+        background-position:-1867 -222;
+}
+.two-diamonds {
+        background-position:-162 -437;
+}
+.three-diamonds {
+        background-position:-317 -437;
+}
+.four-diamonds {
+        background-position:-472 -437;
+}
+.five-diamonds {
+        background-position:-627 -437;
+}
+.six-diamonds {
+        background-position:-782 -437;
+}
+.seven-diamonds {
+        background-position:-937 -437;
+}
+.eight-diamonds {
+        background-position:-1092 -437;
+}
+.nine-diamonds {
+        background-position:-1247 -437;
+}
+.ten-diamonds {
+        background-position:-1402 -437;
+}
+.jack-diamonds {
+        background-position:-1557 -437;
+}
+.queen-diamonds {
+        background-position:-1712 -437;
+}
+.king-diamonds {
+        background-position:-1867 -437;
+}
+.ace-diamonds {
+        background-position: -7 -437;
+}
+.two-clubs {
+        background-position:-162 -652;
+}
+.three-clubs {
+        background-position:-317 -652;
+}
+.four-clubs {
+        background-position:-472 -652;
+}
+.five-clubs {
+        background-position:-627 -652;
+}
+.six-clubs {
+        background-position:-782 -652;
+}
+.seven-clubs {
+        background-position:-937 -652;
+}
+.eight-clubs {
+        background-position:-1092 -652;
+}
+.nine-clubs {
+        background-position:-1247 -652;
+}
+.ten-clubs {
+        background-position:-1402 -652;
+}
+.jack-clubs {
+        background-position:-1557 -652;
+}
+.queen-clubs {
+        background-position:-1712 -652;
+}
+.king-clubs {
+        background-position:-1867 -652;
+}
+.ace-clubs {
+        background-position: -7 -652;
+}
+
+
