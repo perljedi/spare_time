@@ -35,11 +35,15 @@
     <Reference Include="nunit.framework">
       <Package>mono-nunit</Package>
     </Reference>
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="PokerTests.cs" />
+    <Compile Include="PokerBase.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Tests\PokerBaseTests.cs" />
+    <Compile Include="Library\ChineseOpenFacePoker.cs" />
+    <Compile Include="Tests\ChineseOpenFacePokerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.desktop">
@@ -47,4 +51,8 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Tests\" />
+    <Folder Include="Library\" />
+  </ItemGroup>
 </Project>

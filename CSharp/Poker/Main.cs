@@ -1,121 +1,58 @@
 using System;
+using System.Collections.Generic;
 
 namespace Poker
 {
-	using System.Collections.Generic;
-	using System.Linq;
-
-	class MainClass
+	public class PokerGame
 	{
-		public static void Main (string[] args)
+		public static void Main() 
 		{
-			Console.WriteLine ("Hello World!");
+			List<Player> players = new List<Player>();
+			ChineseOpenFaceDealer dealer = new ChineseOpenFaceDealer(players);
+			dealer.Deal();
 		}
 	}
 
-	class Deck
+	public class DumbBot : Player
 	{
-		private List<Card> cards;
-		private List<Card> stack;
+		int m_position;
+		int nextHand;
+		List<Hand> hands;
 
-		public Deck ()
+		public DumbBot(){
+			hands = new List<Hand>();
+			hands.Add(new Hand());
+			hands.Add(new Hand());
+			hands.Add(new Hand());
+			nextHand=0;
+		}
+
+		public DumbBot (int position)
 		{
-			cards = new List<Card>();
-			stack = new List<Card>();
-			foreach (int sval in Enum.GetValues(typeof(Card.Suit))) {
-				for (int i=2; i<15; i++) {
-					Card newCard = new Card ((Card.Suit)sval, i);
-					cards.Add(newCard);
-					stack.Add(newCard);
+			m_position = position;
+		}
+
+		public List<Move> placeCards (List<Card> cards, Table currentState)
+		{
+			var moves = new List<Move> ();
+			foreach (Card next in cards) {
+				hands[nextHand].Add(next);
+				var nextMove = new ChineseMove();
+				moves.Add(nextMove);
+
+				if(hands[nextHand].count == 5){
+					nextHand++;
 				}
 			}
+			return moves;
 		}
-
-		public void shuffle ()
+		public Opponent getPublicState()
 		{
-
+			return new Opponent();
 		}
-
-		public Card getCard ()
+		public void setPosition(int position)
 		{
-			Card dealt = stack[0];
-			stack.Remove(dealt);
-			return dealt;
+			m_position = position;
 		}
-		public int getStackSize ()
-		{
-			return stack.Count;
-		}
-
-		public bool isValidCard (Card card)
-		{
-			return cards.Contains(card);
-		}
-
 	}
-	class Card
-	{
-		public enum Suit
-		{
-			Club,
-			Diamond,
-			Heart,
-			Spade
-		}
-
-		public enum Value {
-			Two=2,
-			Three=3,
-			Four=4,
-			Five=5,
-			Six=6,
-			Seven=7,
-			Eight=8,
-			Nine=9,
-			Ten=10,
-			Jack=11,
-			Queen=12,
-			King=13,
-			Ace=14
-		}
-
-		private Suit m_suit;
-		private int m_value;
-
-		public Card (Suit suit, int val)
-		{
-			m_suit = suit;
-			m_value = val;
-		}
-		public Card (Suit suit, Value val)
-		{
-			m_suit = suit;
-			m_value = (int)val;
-		}
-		public Suit suit {
-			get {
-				return m_suit;
-			}
-		}
-		public Value value {
-			get {
-				return (Value)m_value;
-			}
-		}
-		public int IntegerValue {
-			get {
-				return m_value;
-			}
-		}	
-		public bool isFaceCard ()
-		{
-			if (m_value > 10 && m_value < 14) 
-			{
-				return true;
-			}
-			return false;
-		}
-
-	}
-
 }

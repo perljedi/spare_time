@@ -1,13 +1,43 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Poker/PokerTests.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Poker/Main.cs">
     <Files>
-      <File FileName="Poker/Main.cs" Line="13" Column="3" />
-      <File FileName="Poker/PokerTests.cs" Line="1" Column="1" />
+      <File FileName="Poker/Main.cs" Line="175" Column="1" />
+      <File FileName="Poker/PokerTests.cs" Line="71" Column="4" />
     </Files>
     <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Poker" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="Main.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True">
+          <Node name="Poker" expanded="True">
+            <Node name="Microsoft" expanded="True">
+              <Node name="CSharp" expanded="True" />
+            </Node>
+            <Node name="System" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="ConnectionManagerPad">
+        <State selected="True" />
+      </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Poker" expanded="True">
+            <Node name="Poker" expanded="True">
+              <Node name="CardTests" selected="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
