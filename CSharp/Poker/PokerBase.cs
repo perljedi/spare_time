@@ -147,10 +147,11 @@ namespace Poker
 
 	public struct Opponent
 	{
-		String name;
-		int position;
-		int chips;
-		Action lastAction;
+		public String name;
+		public int position;
+		public int chips;
+		public Action lastAction;
+		public List<Hand> hands;
 	}
 
 	public struct Hand
@@ -165,21 +166,21 @@ namespace Poker
 		long getPot();
 	}
 
-	public interface Player
+	public interface IPlayer
 	{
-		Opponent getPublicState();
-		List<Move> placeCards(List<Card> cards, Table gameState);
+		Move takeAction(List<Card> cards, Table gameState);
 		void setPosition(int position);
+		int getPosition();
 	}
 
 	public abstract class Dealer
 	{
 		protected Deck myDeck;
-		protected List<Player> players;
+		protected List<IPlayer> players;
 		protected Boolean gameOver;
 
 
-		public Dealer (List<Player> player_list)
+		public Dealer (List<IPlayer> player_list)
 		{
 			myDeck = new Deck();
 			myDeck.shuffle();
@@ -194,7 +195,7 @@ namespace Poker
 			gameOver=false;
 		}
 
-		public List<Player> Players {
+		public List<IPlayer> Players {
 			get {
 				return players;
 			}
