@@ -41,10 +41,11 @@ namespace Poker
 			} else {
 				foreach (IPlayer player in players) {
 					ChinesePokerTable tab = new ChinesePokerTable (m_opponents);
-					ChineseMove player_move = (ChineseMove)player.takeAction (new List<Card> (){ myDeck.getCard() }, (Table)tab);
-					int pos = player.getPosition ();
-					int ind = pos-1;
-					//m_opponents [ind].hands [player_move.rowNumber].cards.Add (player_move.myCard);
+//					ChineseMove player_move = (ChineseMove)
+				    player.takeAction (new List<Card> (){ myDeck.getCard() }, (Table)tab);
+//					int pos = player.getPosition ();
+//					int ind = pos-1;
+//					m_opponents [ind].hands [player_move.rowNumber].cards.Add (player_move.myCard);
 				}
 			}
 			if (myDeck.getStackSize() < players.Count) {
