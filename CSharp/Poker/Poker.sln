@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poker", "Poker.csproj", "{EA35B64C-5506-4524-9B59-6ED0B13F9ED7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA35B64C-5506-4524-9B59-6ED0B13F9ED7}.Debug|x86.ActiveCfg = Debug|x86
+		{EA35B64C-5506-4524-9B59-6ED0B13F9ED7}.Debug|x86.Build.0 = Debug|x86
+		{EA35B64C-5506-4524-9B59-6ED0B13F9ED7}.Release|x86.ActiveCfg = Release|x86
+		{EA35B64C-5506-4524-9B59-6ED0B13F9ED7}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Poker.csproj
+	EndGlobalSection
+EndGlobal

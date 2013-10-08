@@ -39,11 +39,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="PokerBase.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Tests\PokerBaseTests.cs" />
     <Compile Include="Library\ChineseOpenFacePoker.cs" />
     <Compile Include="Tests\ChineseOpenFacePokerTests.cs" />
+    <Compile Include="Library\PokerBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.desktop">

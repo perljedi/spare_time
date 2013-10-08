@@ -8,23 +8,27 @@ namespace Poker
 	[TestFixture()]
 	public class DeckTests
 	{
+		Deck testDeck;
+		[SetUp]
+		public void Init ()
+		{
+			testDeck = new Deck();
+		}
+
 		[Test()]
 		public void aDeckStartsWith52Cards ()
 		{
-			Deck testDeck = new Deck();
 			Assert.AreEqual(testDeck.getStackSize(), 52);
 		}
 		[Test()]
 		public void getCardReturnsACard ()
 		{
-			Deck testDeck = new Deck();
 			Assert.IsInstanceOf<Card>(testDeck.getCard());
 		}
 
 		[Test()]
 		public void stackSizeDecreasesWhenACardIsDealt ()
 		{
-			Deck testDeck = new Deck();
 			Assert.AreEqual(testDeck.getStackSize(), 52);
 			testDeck.getCard();
 			Assert.AreEqual(testDeck.getStackSize(), 51);
@@ -33,7 +37,6 @@ namespace Poker
 		[Test()]
 		public void getCardsReturnsANumberOfCardsRequested()
 		{
-			Deck testDeck = new Deck();
 			List<Card> cards = testDeck.getCards(5);
 			Assert.AreEqual(cards.Count, 5);
 		}
@@ -41,7 +44,6 @@ namespace Poker
 		public void deckHasOnefEachCard ()
 		{
 			Dictionary<Card.Suit,List<Card>> cardsBySuit = new Dictionary<Card.Suit, List<Card>>();
-			Deck testDeck = new Deck ();
 			while (testDeck.getStackSize() > 0) {
 				Card next = testDeck.getCard();
 				if(! cardsBySuit.ContainsKey(next.suit)){
@@ -60,8 +62,6 @@ namespace Poker
 		[Test()]
 		public void testDeckKnowsItsOwnCards ()
 		{
-			Deck testDeck = new Deck();
-
 			Card looseCard = new Card(Card.Suit.Club, 2);
 			Assert.IsFalse(testDeck.isValidCard(looseCard));
 			Card fromDeck = testDeck.getCard();
@@ -72,16 +72,61 @@ namespace Poker
 		[ExpectedException(typeof(OutOfCardsException))]
 		public void testGetCardThrowsExceptionIfStackIsEmpty ()
 		{
-			Deck testDeck = new Deck ();
 			while (testDeck.getStackSize() > 0) {
 				testDeck.getCard ();
 			}
 			testDeck.getCard();
 		}
+	}
 
+	public class TestDealer : Dealer
+	{
+		public override void Deal(){
+			//no-op
+		}
+	}
+			    
+	[TestFixture()]
+	public class DealerTests
+	{
+		Dealer testDealer;
+		Hand testHand;
+
+		[TestFixtureSetUp]
+		public void Init ()
+		{
+			testDealer = new TestDealer();
+		}
+
+		[Test]
+		public void test_isFlush_returnsFalseForNonFlush ()
+		{
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 3));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, 5));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, 6));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 8));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 9));
+
+			Assert.IsFalse(testDealer.isFlush(testHand));
+		}
+		[Test]
+		public void test_isFlush_returnsTrueForFlush ()
+		{
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 3));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 5));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 6));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 8));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 9));
+
+			Assert.IsTrue(testDealer.isFlush(testHand));
+		}
 
 	}
-			               
+
 	[TestFixture()]
 	public class CardTests
 	{

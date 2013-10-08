@@ -49,7 +49,7 @@ namespace Poker
 				}
 			}
 			if (myDeck.getStackSize() < players.Count) {
-				gameOver = true;
+				GameOver = true;
 			}
 			round++;
 		}
