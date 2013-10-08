@@ -124,7 +124,61 @@ namespace Poker
 
 			Assert.IsTrue(testDealer.isFlush(testHand));
 		}
+		[Test]
+		public void test_isStraight_returnsFalseIfAnyPairsExist ()
+		{
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 3));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, 3));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 6));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 8));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 9));
 
+			Assert.IsFalse(testDealer.isStraight(testHand));
+		}
+
+		[Test]
+		public void test_isStraight_returnsFalseIfNoPairsButLowCardIsMoreThanFourLessThanHigh ()
+		{
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 2));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, 3));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 6));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 8));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 9));
+
+			Assert.IsFalse(testDealer.isStraight(testHand));
+		}
+
+		[Test]
+		public void test_isStraight_returnsTrueIfNoPairsAndHighIsFourMoreThanLow ()
+		{
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 2));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, 3));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 4));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 5));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 6));
+
+			Assert.IsTrue(testDealer.isStraight(testHand));
+		}
+
+		[Test]
+		public void test_isStraight_returnsTrueForAceThroughFive ()
+		{
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Two));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Three));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Four));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+
+			Assert.IsTrue(testDealer.isStraight(testHand));
+		}
 	}
 
 	[TestFixture()]

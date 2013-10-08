@@ -105,6 +105,11 @@ namespace Poker
 			suit = mSuit;
 			value = (Value)val;
 		}
+		public Card (Suit mSuit, Value val)
+		{
+			suit = mSuit;
+			value = val;
+		}
 		public Card (int intSuit, Value val)
 		{
 			suit = (Suit) intSuit;
@@ -204,15 +209,21 @@ namespace Poker
 
 		public virtual Boolean isFlush (Hand hand)
 		{
-			Dictionary<Card.Suit, int> suits = new Dictionary<Card.Suit, int> ();
-			foreach (Card card in hand.cards) {
-				if(! suits.ContainsKey(card.suit)){
-					suits.Add(card.suit, 0);
-				}
-				suits[card.suit]++;
-			}
-			return suits.Keys.Count == 1;
+
+			return hand.cards.Count == 5 && hand.cards.Select(x=>x.suit).Distinct().ToList().Count == 1;
 		}
 
+		public virtual bool isStraight (Hand testHand)
+		{
+			List<Card.Value> values = testHand.cards.Select (x => x.value).Distinct ().OrderBy(x=>(int)x).ToList();
+			if (values.Count < 5) {
+				return false;
+			} else {
+				if(values[4].Equals(Card.Value.Ace) && values[3].Equals(Card.Value.Five)){
+					return true;
+				}
+				return values[4]-values[0] == 4;
+			}
+		}
 	}
 }
