@@ -213,9 +213,9 @@ namespace Poker
 			return hand.cards.Count == 5 && hand.cards.Select(x=>x.suit).Distinct().ToList().Count == 1;
 		}
 
-		public virtual bool isStraight (Hand testHand)
+		public virtual bool isStraight (Hand hand)
 		{
-			List<Card.Value> values = testHand.cards.Select (x => x.value).Distinct ().OrderBy(x=>(int)x).ToList();
+			List<Card.Value> values = hand.cards.Select (x => x.value).Distinct ().OrderBy(x=>(int)x).ToList();
 			if (values.Count < 5) {
 				return false;
 			} else {
@@ -224,6 +224,22 @@ namespace Poker
 				}
 				return values[4]-values[0] == 4;
 			}
+		}
+		public Boolean isFourOfAKind (Hand hand)
+		{
+			var setsBySize = this.groupByValueAndSortByCount(hand.cards);
+			return setsBySize[0].Value == 4;
+		}
+
+		public bool isFullHouse (Hand hand)
+		{
+			var setsBySize = this.groupByValueAndSortByCount(hand.cards);
+			return setsBySize.Count () == 2 && setsBySize[0].Value == 3 && setsBySize[1].Value == 2;
+		}
+
+		protected KeyValuePair<Card.Value,int>[] groupByValueAndSortByCount (List<Card> cards)
+		{
+			return cards.GroupBy(x => x.value).Select(g=> new{ g.Key, Count=g.Count () }).OrderByDescending(x=>x.Count).ToArray ();
 		}
 	}
 }

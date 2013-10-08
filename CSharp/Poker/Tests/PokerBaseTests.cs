@@ -179,6 +179,70 @@ namespace Poker
 
 			Assert.IsTrue(testDealer.isStraight(testHand));
 		}
+
+		[Test]
+		public void test_isFourOfAKind_returnsFalseForLessThanFour(){
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Three));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Four));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+
+			Assert.IsFalse(testDealer.isFourOfAKind(testHand));
+		}
+		[Test]
+		public void test_isFourOfAKind_returnsTrueForIWin(){
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Diamond, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+
+			Assert.IsTrue(testDealer.isFourOfAKind(testHand));
+		}
+
+		[Test]
+		public void test_isFullHouse_returnsFalseForFoutOfAKind(){
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Diamond, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+
+			Assert.IsFalse(testDealer.isFullHouse(testHand));
+		}
+
+		[Test]
+		public void test_isFullHouse_returnsFalseForTwoPair(){
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, Card.Value.King));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Diamond, Card.Value.King));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+
+			Assert.IsFalse(testDealer.isFullHouse(testHand));
+		}
+
+		[Test]
+		public void test_isFullHouse_returnsTrueForIWin(){
+			testHand = new Hand();
+			testHand.cards = new List<Card>();
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, Card.Value.King));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Diamond, Card.Value.King));
+			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.King));
+
+			Assert.IsTrue(testDealer.isFullHouse(testHand));
+		}
 	}
 
 	[TestFixture()]
