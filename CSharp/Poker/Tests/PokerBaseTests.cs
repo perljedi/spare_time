@@ -93,47 +93,52 @@ namespace Poker
 		Hand testHand;
 
 		[TestFixtureSetUp]
-		public void Init ()
+		public void InitDealer ()
 		{
 			testDealer = new TestDealer();
+		}
+
+		[SetUp]
+		public void InitHand (){
+			testHand = new Hand();
 		}
 
 		[Test]
 		public void test_isFlush_returnsFalseForNonFlush ()
 		{
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 3));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, 5));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, 6));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 8));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 9));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, 3),
+				new Card(Poker.Card.Suit.Spade, 5),
+				new Card(Poker.Card.Suit.Heart, 6),
+				new Card(Poker.Card.Suit.Club, 8),
+				new Card(Poker.Card.Suit.Club, 9)
+			};
 
 			Assert.IsFalse(testDealer.isFlush(testHand));
 		}
 		[Test]
 		public void test_isFlush_returnsTrueForFlush ()
 		{
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 3));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 5));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 6));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 8));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 9));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, 3),
+				new Card(Poker.Card.Suit.Club, 5),
+				new Card(Poker.Card.Suit.Club, 6),
+				new Card(Poker.Card.Suit.Club, 8),
+				new Card(Poker.Card.Suit.Club, 9)
+			};
 
 			Assert.IsTrue(testDealer.isFlush(testHand));
 		}
 		[Test]
 		public void test_isStraight_returnsFalseIfAnyPairsExist ()
 		{
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 3));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, 3));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 6));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 8));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 9));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, 3),
+				new Card(Poker.Card.Suit.Heart, 3),
+				new Card(Poker.Card.Suit.Club, 6),
+				new Card(Poker.Card.Suit.Club, 8),
+				new Card(Poker.Card.Suit.Club, 9)
+			};
 
 			Assert.IsFalse(testDealer.isStraight(testHand));
 		}
@@ -141,13 +146,13 @@ namespace Poker
 		[Test]
 		public void test_isStraight_returnsFalseIfNoPairsButLowCardIsMoreThanFourLessThanHigh ()
 		{
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 2));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, 3));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 6));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 8));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 9));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, 2),
+				new Card(Poker.Card.Suit.Heart, 3),
+				new Card(Poker.Card.Suit.Club, 6),
+				new Card(Poker.Card.Suit.Club, 8),
+				new Card(Poker.Card.Suit.Club, 9)
+			};
 
 			Assert.IsFalse(testDealer.isStraight(testHand));
 		}
@@ -155,13 +160,13 @@ namespace Poker
 		[Test]
 		public void test_isStraight_returnsTrueIfNoPairsAndHighIsFourMoreThanLow ()
 		{
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 2));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, 3));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 4));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 5));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, 6));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, 2),
+				new Card(Poker.Card.Suit.Heart, 3),
+				new Card(Poker.Card.Suit.Club, 4),
+				new Card(Poker.Card.Suit.Club, 5),
+				new Card(Poker.Card.Suit.Club, 6)
+			};
 
 			Assert.IsTrue(testDealer.isStraight(testHand));
 		}
@@ -169,77 +174,77 @@ namespace Poker
 		[Test]
 		public void test_isStraight_returnsTrueForAceThroughFive ()
 		{
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Two));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Three));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Four));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Two),
+				new Card(Poker.Card.Suit.Club, Card.Value.Three),
+				new Card(Poker.Card.Suit.Club, Card.Value.Four),
+				new Card(Poker.Card.Suit.Club, Card.Value.Five)
+			};
 
 			Assert.IsTrue(testDealer.isStraight(testHand));
 		}
 
 		[Test]
 		public void test_isFourOfAKind_returnsFalseForLessThanFour(){
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Three));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Four));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Club, Card.Value.Three),
+				new Card(Poker.Card.Suit.Club, Card.Value.Four),
+				new Card(Poker.Card.Suit.Club, Card.Value.Five)
+			};
 
 			Assert.IsFalse(testDealer.isFourOfAKind(testHand));
 		}
 		[Test]
 		public void test_isFourOfAKind_returnsTrueForIWin(){
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Diamond, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Club, Card.Value.Five)
+			};
 
 			Assert.IsTrue(testDealer.isFourOfAKind(testHand));
 		}
 
 		[Test]
 		public void test_isFullHouse_returnsFalseForFoutOfAKind(){
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Diamond, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Club, Card.Value.Five)
+			};
 
 			Assert.IsFalse(testDealer.isFullHouse(testHand));
 		}
 
 		[Test]
 		public void test_isFullHouse_returnsFalseForTwoPair(){
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, Card.Value.King));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Diamond, Card.Value.King));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Five));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.King),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.King),
+				new Card(Poker.Card.Suit.Club, Card.Value.Five)
+			};
 
 			Assert.IsFalse(testDealer.isFullHouse(testHand));
 		}
 
 		[Test]
 		public void test_isFullHouse_returnsTrueForIWin(){
-			testHand = new Hand();
-			testHand.cards = new List<Card>();
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Heart, Card.Value.Ace));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Spade, Card.Value.King));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Diamond, Card.Value.King));
-			testHand.cards.Add(new Card(Poker.Card.Suit.Club, Card.Value.King));
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.King),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.King),
+				new Card(Poker.Card.Suit.Club, Card.Value.King)
+			};
 
 			Assert.IsTrue(testDealer.isFullHouse(testHand));
 		}

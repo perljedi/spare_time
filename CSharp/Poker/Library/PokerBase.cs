@@ -239,7 +239,8 @@ namespace Poker
 
 		protected KeyValuePair<Card.Value,int>[] groupByValueAndSortByCount (List<Card> cards)
 		{
-			return cards.GroupBy(x => x.value).Select(g=> new{ g.Key, Count=g.Count () }).OrderByDescending(x=>x.Count).ToArray ();
+			Dictionary<Card.Value,int> groupedCards = cards.GroupBy(x => x.value).Select(g=> new { g.Key, Count=g.Count () }).ToDictionary(x=>x.Key, x=>x.Count);
+			return groupedCards.OrderByDescending(x=>x.Value).ToArray ();
 		}
 	}
 }
