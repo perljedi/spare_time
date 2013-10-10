@@ -79,25 +79,10 @@ namespace Poker
 		}
 	}
 
-	public class TestDealer : Dealer
-	{
-		public override void Deal(){
-			//no-op
-		}
-	}
-			    
 	[TestFixture()]
-	public class DealerTests
+	public class HandTests
 	{
-		Dealer testDealer;
 		Hand testHand;
-
-		[TestFixtureSetUp]
-		public void InitDealer ()
-		{
-			testDealer = new TestDealer();
-		}
-
 		[SetUp]
 		public void InitHand (){
 			testHand = new Hand();
@@ -114,7 +99,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, 9)
 			};
 
-			Assert.IsFalse(testDealer.isFlush(testHand));
+			Assert.IsFalse(testHand.isFlush());
 		}
 		[Test]
 		public void test_isFlush_returnsTrueForFlush ()
@@ -127,7 +112,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, 9)
 			};
 
-			Assert.IsTrue(testDealer.isFlush(testHand));
+			Assert.IsTrue(testHand.isFlush());
 		}
 		[Test]
 		public void test_isStraight_returnsFalseIfAnyPairsExist ()
@@ -140,7 +125,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, 9)
 			};
 
-			Assert.IsFalse(testDealer.isStraight(testHand));
+			Assert.IsFalse(testHand.isStraight());
 		}
 
 		[Test]
@@ -154,7 +139,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, 9)
 			};
 
-			Assert.IsFalse(testDealer.isStraight(testHand));
+			Assert.IsFalse(testHand.isStraight());
 		}
 
 		[Test]
@@ -168,7 +153,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, 6)
 			};
 
-			Assert.IsTrue(testDealer.isStraight(testHand));
+			Assert.IsTrue(testHand.isStraight());
 		}
 
 		[Test]
@@ -182,7 +167,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Five)
 			};
 
-			Assert.IsTrue(testDealer.isStraight(testHand));
+			Assert.IsTrue(testHand.isStraight());
 		}
 
 		[Test]
@@ -195,7 +180,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Five)
 			};
 
-			Assert.IsFalse(testDealer.isFourOfAKind(testHand));
+			Assert.IsFalse(testHand.isFourOfAKind());
 		}
 
 		[Test]
@@ -208,7 +193,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Five)
 			};
 
-			Assert.IsTrue(testDealer.isFourOfAKind(testHand));
+			Assert.IsTrue(testHand.isFourOfAKind());
 		}
 
 		[Test]
@@ -220,7 +205,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
 			};
 
-			Assert.IsTrue(testDealer.isFourOfAKind(testHand));
+			Assert.IsTrue(testHand.isFourOfAKind());
 		}
 
 		[Test]
@@ -233,7 +218,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace)
 			};
 
-			Assert.IsTrue(testDealer.isFourOfAKind(testHand));
+			Assert.IsTrue(testHand.isFourOfAKind());
 		}
 
 		[Test]
@@ -246,7 +231,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Five)
 			};
 
-			Assert.IsFalse(testDealer.isFullHouse(testHand));
+			Assert.IsFalse(testHand.isFullHouse());
 		}
 
 		[Test]
@@ -259,7 +244,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Five)
 			};
 
-			Assert.IsFalse(testDealer.isFullHouse(testHand));
+			Assert.IsFalse(testHand.isFullHouse());
 		}
 
 		[Test]
@@ -272,7 +257,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.King)
 			};
 
-			Assert.IsTrue(testDealer.isFullHouse(testHand));
+			Assert.IsTrue(testHand.isFullHouse());
 		}
 
 		[Test]
@@ -284,7 +269,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Diamond, Card.Value.King),
 				new Card(Poker.Card.Suit.Club, Card.Value.Three)
 			};
-			Assert.IsFalse(testDealer.isThreeOfAKind(testHand));
+			Assert.IsFalse(testHand.isThreeOfAKind());
 		}
 
 		[Test]
@@ -296,7 +281,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Diamond, Card.Value.Four),
 				new Card(Poker.Card.Suit.Club, Card.Value.Three)
 			};
-			Assert.IsFalse(testDealer.isThreeOfAKind(testHand));
+			Assert.IsFalse(testHand.isThreeOfAKind());
 		}
 		[Test]
 		public void test_isThreeOfAKind_returnsTrueForThree(){
@@ -307,7 +292,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Diamond, Card.Value.Four),
 				new Card(Poker.Card.Suit.Club, Card.Value.Three)
 			};
-			Assert.IsTrue(testDealer.isThreeOfAKind(testHand));
+			Assert.IsTrue(testHand.isThreeOfAKind());
 		}
 
 		[Test]
@@ -319,7 +304,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
 				new Card(Poker.Card.Suit.Club, Card.Value.Three)
 			};
-			Assert.IsFalse(testDealer.isThreeOfAKind(testHand));
+			Assert.IsFalse(testHand.isThreeOfAKind());
 		}
 
 		[Test]
@@ -332,7 +317,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.King)
 			};
 
-			Assert.IsFalse(testDealer.isThreeOfAKind(testHand));
+			Assert.IsFalse(testHand.isThreeOfAKind());
 		}
 
 		[Test]
@@ -342,7 +327,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
 				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
 			};
-			Assert.IsTrue(testDealer.isThreeOfAKind(testHand));
+			Assert.IsTrue(testHand.isThreeOfAKind());
 		}
 
 		[Test]
@@ -352,7 +337,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
 				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
 			};
-			Assert.IsFalse(testDealer.isTwoPair(testHand));
+			Assert.IsFalse(testHand.isTwoPair());
 		}
 
 		[Test]
@@ -364,7 +349,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Spade, Card.Value.Ace)
 			};
 
-			Assert.IsFalse(testDealer.isTwoPair(testHand));
+			Assert.IsFalse(testHand.isTwoPair());
 		}
 		[Test]
 		public void test_isTwoPair_returnsFalseForFullHouse(){
@@ -376,7 +361,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.King)
 			};
 
-			Assert.IsFalse(testDealer.isTwoPair(testHand));
+			Assert.IsFalse(testHand.isTwoPair());
 		}
 		[Test]
 		public void test_isTwoPair_returnsFalseForOnePair(){
@@ -388,7 +373,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
 			};
 
-			Assert.IsFalse(testDealer.isTwoPair(testHand));
+			Assert.IsFalse(testHand.isTwoPair());
 		}
 		[Test]
 		public void test_isTwoPair_returnsFalseForNoPairs(){
@@ -400,7 +385,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
 			};
 
-			Assert.IsFalse(testDealer.isTwoPair(testHand));
+			Assert.IsFalse(testHand.isTwoPair());
 		}
 
 		[Test]
@@ -413,7 +398,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
 			};
 
-			Assert.IsTrue(testDealer.isTwoPair(testHand));
+			Assert.IsTrue(testHand.isTwoPair());
 		}
 
 		[Test]
@@ -426,7 +411,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
 			};
 
-			Assert.IsFalse(testDealer.isOnePair(testHand));
+			Assert.IsFalse(testHand.isOnePair());
 		}
 
 		[Test]
@@ -439,7 +424,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
 			};
 
-			Assert.IsFalse(testDealer.isOnePair(testHand));
+			Assert.IsFalse(testHand.isOnePair());
 		}
 		[Test]
 		public void test_isOnePair_returnsFalseForFourOfAKind(){
@@ -451,7 +436,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
 			};
 
-			Assert.IsFalse(testDealer.isOnePair(testHand));
+			Assert.IsFalse(testHand.isOnePair());
 		}
 		[Test]
 		public void test_isOnePair_returnsTrueForOnePair(){
@@ -463,7 +448,7 @@ namespace Poker
 				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
 			};
 
-			Assert.IsTrue(testDealer.isOnePair(testHand));
+			Assert.IsTrue(testHand.isOnePair());
 		}
 	}
 

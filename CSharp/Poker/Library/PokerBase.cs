@@ -158,9 +158,76 @@ namespace Poker
 		public List<Hand> hands;
 	}
 
-	public struct Hand
+	public class Hand
 	{
-		public List<Card> cards;
+		public List<Card> cards{ 
+			get; set; 
+		}
+		public virtual Boolean isFlush ()
+		{
+			return cards.Count == 5 && cards.Select(x=>x.suit).Distinct().ToList().Count == 1;
+		}
+		public virtual bool isStraight ()
+		{
+			List<Card.Value> values = cards.Select (x => x.value).Distinct ().OrderBy(x=>(int)x).ToList();
+			if (values.Count < 5) {
+				return false;
+			} else {
+				if(values[4].Equals(Card.Value.Ace) && values[3].Equals(Card.Value.Five)){
+					return true;
+				}
+				return values[4]-values[0] == 4;
+			}
+		}
+		public Boolean isFourOfAKind ()
+		{
+			var setsBySize = this.groupByValueAndSortByCount(cards);
+			return setsBySize[0].Value == 4;
+		}
+
+		public bool isFullHouse ()
+		{
+			var setsBySize = this.groupByValueAndSortByCount(cards);
+			return setsBySize.Count () == 2 && setsBySize[0].Value == 3 && setsBySize[1].Value == 2;
+		}
+
+		public bool isThreeOfAKind ()
+		{
+			if (cards.Count () < 3) {
+				return false;
+			} else {
+				var setsBySize = this.groupByValueAndSortByCount (cards);
+				if (setsBySize [0].Value != 3) {
+					return false;
+				}
+				return setsBySize.Count() == 1 || setsBySize [1].Value == 1;
+			}
+		}
+
+		public bool isTwoPair ()
+		{
+			if (cards.Count () < 4) {
+				return false;
+			} else {
+				var setsBySize = this.groupByValueAndSortByCount (cards);
+				return setsBySize[0].Value == 2 && setsBySize[1].Value == 2;
+			}
+		}
+
+		public bool isOnePair ()
+		{
+			if (cards.Count () < 2) {
+				return false;
+			} else {
+				var setsBySize = this.groupByValueAndSortByCount (cards);
+				return setsBySize[0].Value == 2 && (setsBySize.Count() == 1 || setsBySize[1].Value == 1);
+			}
+		}
+
+		protected KeyValuePair<Card.Value,int>[] groupByValueAndSortByCount (List<Card> someCards)
+		{
+			return someCards.GroupBy(x => x.value).Select(g=> new { g.Key, Count=g.Count () }).OrderByDescending(ob=>ob.Count).ToDictionary(x=>x.Key, x=>x.Count).ToArray ();
+		}
 	}
 
 	public interface Table
@@ -206,73 +273,5 @@ namespace Poker
 		}
 
 		public abstract void Deal();
-
-		public virtual Boolean isFlush (Hand hand)
-		{
-
-			return hand.cards.Count == 5 && hand.cards.Select(x=>x.suit).Distinct().ToList().Count == 1;
-		}
-
-		public virtual bool isStraight (Hand hand)
-		{
-			List<Card.Value> values = hand.cards.Select (x => x.value).Distinct ().OrderBy(x=>(int)x).ToList();
-			if (values.Count < 5) {
-				return false;
-			} else {
-				if(values[4].Equals(Card.Value.Ace) && values[3].Equals(Card.Value.Five)){
-					return true;
-				}
-				return values[4]-values[0] == 4;
-			}
-		}
-		public Boolean isFourOfAKind (Hand hand)
-		{
-			var setsBySize = this.groupByValueAndSortByCount(hand.cards);
-			return setsBySize[0].Value == 4;
-		}
-
-		public bool isFullHouse (Hand hand)
-		{
-			var setsBySize = this.groupByValueAndSortByCount(hand.cards);
-			return setsBySize.Count () == 2 && setsBySize[0].Value == 3 && setsBySize[1].Value == 2;
-		}
-
-		public bool isThreeOfAKind (Hand hand)
-		{
-			if (hand.cards.Count () < 3) {
-				return false;
-			} else {
-				var setsBySize = this.groupByValueAndSortByCount (hand.cards);
-				if (setsBySize [0].Value != 3) {
-					return false;
-				}
-				return setsBySize.Count() == 1 || setsBySize [1].Value == 1;
-			}
-		}
-
-		public bool isTwoPair (Hand hand)
-		{
-			if (hand.cards.Count () < 4) {
-				return false;
-			} else {
-				var setsBySize = this.groupByValueAndSortByCount (hand.cards);
-				return setsBySize[0].Value == 2 && setsBySize[1].Value == 2;
-			}
-		}
-
-		public bool isOnePair (Hand hand)
-		{
-			if (hand.cards.Count () < 2) {
-				return false;
-			} else {
-				var setsBySize = this.groupByValueAndSortByCount (hand.cards);
-				return setsBySize[0].Value == 2 && (setsBySize.Count() == 1 || setsBySize[1].Value == 1);
-			}
-		}
-
-		protected KeyValuePair<Card.Value,int>[] groupByValueAndSortByCount (List<Card> cards)
-		{
-			return cards.GroupBy(x => x.value).Select(g=> new { g.Key, Count=g.Count () }).OrderByDescending(ob=>ob.Count).ToDictionary(x=>x.Key, x=>x.Count).ToArray ();
-		}
 	}
 }
