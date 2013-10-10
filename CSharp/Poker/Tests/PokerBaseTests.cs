@@ -197,6 +197,7 @@ namespace Poker
 
 			Assert.IsFalse(testDealer.isFourOfAKind(testHand));
 		}
+
 		[Test]
 		public void test_isFourOfAKind_returnsTrueForIWin(){
 			testHand.cards = new List<Card>{
@@ -205,6 +206,31 @@ namespace Poker
 				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
 				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
 				new Card(Poker.Card.Suit.Club, Card.Value.Five)
+			};
+
+			Assert.IsTrue(testDealer.isFourOfAKind(testHand));
+		}
+
+		[Test]
+		public void test_isFourOfAKind_returnsTrueForIWin_lessThenFiveCards(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
+			};
+
+			Assert.IsTrue(testDealer.isFourOfAKind(testHand));
+		}
+
+		[Test]
+		public void test_isFourOfAKind_returnsTrueWhenCardsAreNotInOrder(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Club, Card.Value.Five),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace)
 			};
 
 			Assert.IsTrue(testDealer.isFourOfAKind(testHand));
@@ -247,6 +273,197 @@ namespace Poker
 			};
 
 			Assert.IsTrue(testDealer.isFullHouse(testHand));
+		}
+
+		[Test]
+		public void test_isThreeOfAKind_returnsFalseForTwoPair(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.King),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.King),
+				new Card(Poker.Card.Suit.Club, Card.Value.Three)
+			};
+			Assert.IsFalse(testDealer.isThreeOfAKind(testHand));
+		}
+
+		[Test]
+		public void test_isThreeOfAKind_returnsFalseOnePair(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.King),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Four),
+				new Card(Poker.Card.Suit.Club, Card.Value.Three)
+			};
+			Assert.IsFalse(testDealer.isThreeOfAKind(testHand));
+		}
+		[Test]
+		public void test_isThreeOfAKind_returnsTrueForThree(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Four),
+				new Card(Poker.Card.Suit.Club, Card.Value.Three)
+			};
+			Assert.IsTrue(testDealer.isThreeOfAKind(testHand));
+		}
+
+		[Test]
+		public void test_isThreeOfAKind_returnsFalseForFourOfAKind(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Club, Card.Value.Three)
+			};
+			Assert.IsFalse(testDealer.isThreeOfAKind(testHand));
+		}
+
+		[Test]
+		public void test_isThreeOfAKind_returnsFalseForFullHouse(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.King),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.King),
+				new Card(Poker.Card.Suit.Club, Card.Value.King)
+			};
+
+			Assert.IsFalse(testDealer.isThreeOfAKind(testHand));
+		}
+
+		[Test]
+		public void test_isThreeOfAKind_returnsTrueForThreeCards(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+			};
+			Assert.IsTrue(testDealer.isThreeOfAKind(testHand));
+		}
+
+		[Test]
+		public void test_isTwoPair_returnsFalseForThreeCards(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+			};
+			Assert.IsFalse(testDealer.isTwoPair(testHand));
+		}
+
+		[Test]
+		public void test_isTwoPair_returnsFalseFourOfAKind(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace)
+			};
+
+			Assert.IsFalse(testDealer.isTwoPair(testHand));
+		}
+		[Test]
+		public void test_isTwoPair_returnsFalseForFullHouse(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.King),
+				new Card(Poker.Card.Suit.Club, Card.Value.King)
+			};
+
+			Assert.IsFalse(testDealer.isTwoPair(testHand));
+		}
+		[Test]
+		public void test_isTwoPair_returnsFalseForOnePair(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Three),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Two),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+
+			Assert.IsFalse(testDealer.isTwoPair(testHand));
+		}
+		[Test]
+		public void test_isTwoPair_returnsFalseForNoPairs(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Three),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Five),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Two),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+
+			Assert.IsFalse(testDealer.isTwoPair(testHand));
+		}
+
+		[Test]
+		public void test_isTwoPair_returnsTrueForTwoPair(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Five),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Five),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+
+			Assert.IsTrue(testDealer.isTwoPair(testHand));
+		}
+
+		[Test]
+		public void test_isOnePair_returnsFalseForTwoPair(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Five),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Five),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+
+			Assert.IsFalse(testDealer.isOnePair(testHand));
+		}
+
+		[Test]
+		public void test_isOnePair_returnsFalseForThreeOfAKind(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Five),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+
+			Assert.IsFalse(testDealer.isOnePair(testHand));
+		}
+		[Test]
+		public void test_isOnePair_returnsFalseForFourOfAKind(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+
+			Assert.IsFalse(testDealer.isOnePair(testHand));
+		}
+		[Test]
+		public void test_isOnePair_returnsTrueForOnePair(){
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Nine),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Six),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+
+			Assert.IsTrue(testDealer.isOnePair(testHand));
 		}
 	}
 

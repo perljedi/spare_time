@@ -237,10 +237,42 @@ namespace Poker
 			return setsBySize.Count () == 2 && setsBySize[0].Value == 3 && setsBySize[1].Value == 2;
 		}
 
+		public bool isThreeOfAKind (Hand hand)
+		{
+			if (hand.cards.Count () < 3) {
+				return false;
+			} else {
+				var setsBySize = this.groupByValueAndSortByCount (hand.cards);
+				if (setsBySize [0].Value != 3) {
+					return false;
+				}
+				return setsBySize.Count() == 1 || setsBySize [1].Value == 1;
+			}
+		}
+
+		public bool isTwoPair (Hand hand)
+		{
+			if (hand.cards.Count () < 4) {
+				return false;
+			} else {
+				var setsBySize = this.groupByValueAndSortByCount (hand.cards);
+				return setsBySize[0].Value == 2 && setsBySize[1].Value == 2;
+			}
+		}
+
+		public bool isOnePair (Hand hand)
+		{
+			if (hand.cards.Count () < 2) {
+				return false;
+			} else {
+				var setsBySize = this.groupByValueAndSortByCount (hand.cards);
+				return setsBySize[0].Value == 2 && (setsBySize.Count() == 1 || setsBySize[1].Value == 1);
+			}
+		}
+
 		protected KeyValuePair<Card.Value,int>[] groupByValueAndSortByCount (List<Card> cards)
 		{
-			Dictionary<Card.Value,int> groupedCards = cards.GroupBy(x => x.value).Select(g=> new { g.Key, Count=g.Count () }).ToDictionary(x=>x.Key, x=>x.Count);
-			return groupedCards.OrderByDescending(x=>x.Value).ToArray ();
+			return cards.GroupBy(x => x.value).Select(g=> new { g.Key, Count=g.Count () }).OrderByDescending(ob=>ob.Count).ToDictionary(x=>x.Key, x=>x.Count).ToArray ();
 		}
 	}
 }
