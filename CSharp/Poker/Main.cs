@@ -9,16 +9,13 @@ namespace Poker
 		public static void Main ()
 		{
 
-			List<Card> cards = new List<Card>{
+/*			List<Card> cards = new List<Card>{
 				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
 				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
 				new Card(Poker.Card.Suit.Spade, Card.Value.King),
 				new Card(Poker.Card.Suit.Diamond, Card.Value.King),
 				new Card(Poker.Card.Suit.Club, Card.Value.Five)
-			};
-			var thing = cards.GroupBy(cv=>cv.value).Select(g => new { g.Key, Count=g.Count() });
-
-			Console.WriteLine(thing);
+			};*/
 
 			List<IChinesePokerPlayer> players = new List<IChinesePokerPlayer> ();
 			players.Add (new DumbBot ("Dave"));

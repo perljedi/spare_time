@@ -163,7 +163,7 @@ namespace Poker
 		public List<Card> cards{ 
 			get; set; 
 		}
-		public virtual Boolean isFlush ()
+		public virtual bool isFlush ()
 		{
 			return cards.Count == 5 && cards.Select(x=>x.suit).Distinct().ToList().Count == 1;
 		}
@@ -179,7 +179,13 @@ namespace Poker
 				return values[4]-values[0] == 4;
 			}
 		}
-		public Boolean isFourOfAKind ()
+
+		public virtual Card getHighestCard ()
+		{
+			return cards.OrderByDescending(x=>x.intValue).First();
+		}
+
+		public bool isFourOfAKind ()
 		{
 			var setsBySize = this.groupByValueAndSortByCount(cards);
 			return setsBySize[0].Value == 4;
@@ -222,6 +228,34 @@ namespace Poker
 				var setsBySize = this.groupByValueAndSortByCount (cards);
 				return setsBySize[0].Value == 2 && (setsBySize.Count() == 1 || setsBySize[1].Value == 1);
 			}
+		}
+
+		public float getHandScore ()
+		{
+			float score = 0;
+			if (this.isFlush ()) {
+				if (this.isStraight ()) {
+					score = 8;
+				} else {
+					score = 5;
+				}
+				score += (float)this.getHighestCard().intValue/16;
+			}else if(this.isFourOfAKind()){
+				score = 7;
+				score += (float)this.groupByValueAndSortByCount(cards)[0].Key/16;
+			}else if(this.isFullHouse()){
+				score = 6;
+				score += (float)this.groupByValueAndSortByCount(cards)[0].Key/16;
+			}else if(this.isStraight()){
+				score = 4;
+				score += (float)this.groupByValueAndSortByCount(cards)[0].Key/16;
+			}else if(this.isThreeOfAKind()){
+				score = 3;
+			}else if(this.isTwoPair()){
+
+			}
+
+			return score;
 		}
 
 		protected KeyValuePair<Card.Value,int>[] groupByValueAndSortByCount (List<Card> someCards)

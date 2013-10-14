@@ -2,8 +2,9 @@ using System;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using Poker;
 
-namespace Poker
+namespace PokerTests
 {
 	[TestFixture()]
 	public class DeckTests
@@ -449,6 +450,84 @@ namespace Poker
 			};
 
 			Assert.IsTrue(testHand.isOnePair());
+		}
+
+		[Test]
+		public void test_getHandScore_returns8Point875_forRoyalFlush()
+		{
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Club, Card.Value.King),
+				new Card(Poker.Card.Suit.Club, Card.Value.Queen),
+				new Card(Poker.Card.Suit.Club, Card.Value.Jack),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+			Assert.AreEqual(testHand.getHandScore(), 8.875);
+		}
+
+		[Test]
+		public void test_getHandScore_returns5Point5_forEightHighFlush()
+		{
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Eight),
+				new Card(Poker.Card.Suit.Club, Card.Value.Five),
+				new Card(Poker.Card.Suit.Club, Card.Value.Three),
+				new Card(Poker.Card.Suit.Club, Card.Value.Two),
+				new Card(Poker.Card.Suit.Club, Card.Value.Six)
+			};
+			Assert.AreEqual(testHand.getHandScore(), 5.5);
+		}
+
+		[Test]
+		public void test_getHandScore_returns7Point875_forFourAces()
+		{
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
+				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
+			};
+			Assert.AreEqual(testHand.getHandScore(), 7.875);
+		}
+
+		[Test]
+		public void test_getHandScore_returns6Point8125_forKingsFullOfAnything()
+		{
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.King),
+				new Card(Poker.Card.Suit.Heart, Card.Value.King),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.King),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Two),
+				new Card(Poker.Card.Suit.Club, Card.Value.Two)
+			};
+			Assert.AreEqual(testHand.getHandScore(), 6.8125);
+		}
+
+		[Test]
+		public void test_getHandScore_returns4Point75_forQueenHighStraight()
+		{
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Queen),
+				new Card(Poker.Card.Suit.Club, Card.Value.Jack),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Ten),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Nine),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Eight)
+			};
+			Assert.AreEqual(testHand.getHandScore(), 4.75);
+		}
+
+		[Test]
+		public void test_getHandScore_returns3_forAnyThreeOfAKind()
+		{
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Seven),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Seven),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Seven),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Nine),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Eight)
+			};
+			Assert.AreEqual(testHand.getHandScore(), 3);
 		}
 	}
 

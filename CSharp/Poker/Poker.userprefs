@@ -1,0 +1,42 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Library/PokerBase.cs">
+    <Files>
+      <File FileName="Main.cs" Line="19" Column="1" />
+      <File FileName="Library/PokerBase.cs" Line="231" Column="4" />
+      <File FileName="Library/ChineseOpenFacePoker.cs" Line="52" Column="6" />
+      <File FileName="PokerTests/BaseLibraryTests.cs" Line="12" Column="4" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Poker" expanded="True">
+            <Node name="Library" expanded="True">
+              <Node name="ChineseOpenFacePoker.cs" selected="True" />
+            </Node>
+          </Node>
+          <Node name="PokerTests" expanded="True">
+            <Node name="References" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>hand.cards.FindAll (x =&gt; x.value == distinctValues [0]).Count</Value>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True">
+          <Node name="Poker" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

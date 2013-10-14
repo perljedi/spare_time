@@ -2,15 +2,15 @@
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EA35B64C-5506-4524-9B59-6ED0B13F9ED7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Poker</RootNamespace>
-    <AssemblyName>Poker</AssemblyName>
+    <ProjectGuid>{D206249D-3DA5-4A1A-9921-3C54C840B913}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>PokerTests</RootNamespace>
+    <AssemblyName>PokerTests</AssemblyName>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -18,38 +18,31 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
-    <Externalconsole>true</Externalconsole>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
-    <Externalconsole>true</Externalconsole>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
+      <Private>False</Private>
       <Package>mono-nunit</Package>
     </Reference>
-    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="Library\ChineseOpenFacePoker.cs" />
-    <Compile Include="Library\PokerBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app.desktop">
-      <DeployService-TargetDirectoryId>Linux.DesktopApplications</DeployService-TargetDirectoryId>
-    </Content>
+    <Compile Include="BaseLibraryTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Library\" />
+    <ProjectReference Include="..\Poker.csproj">
+      <Project>{EA35B64C-5506-4524-9B59-6ED0B13F9ED7}</Project>
+      <Name>Poker</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
