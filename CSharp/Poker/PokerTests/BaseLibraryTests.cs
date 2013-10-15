@@ -488,7 +488,7 @@ namespace PokerTests
 				new Card(Poker.Card.Suit.Spade, Card.Value.Ace),
 				new Card(Poker.Card.Suit.Club, Card.Value.Ten)
 			};
-			Assert.AreEqual(testHand.getHandScore(), 7.875);
+			Assert.AreEqual(testHand.getHandScore(), 7.8750625);
 		}
 
 		[Test]
@@ -501,7 +501,7 @@ namespace PokerTests
 				new Card(Poker.Card.Suit.Spade, Card.Value.Two),
 				new Card(Poker.Card.Suit.Club, Card.Value.Two)
 			};
-			Assert.AreEqual(testHand.getHandScore(), 6.8125);
+			Assert.AreEqual(testHand.getHandScore(), 6.8125125);
 		}
 
 		[Test]
@@ -518,7 +518,7 @@ namespace PokerTests
 		}
 
 		[Test]
-		public void test_getHandScore_returns3_forAnyThreeOfAKind()
+		public void test_getHandScore_returns3PointSomething_forAnyThreeOfAKind()
 		{
 			testHand.cards = new List<Card>{
 				new Card(Poker.Card.Suit.Club, Card.Value.Seven),
@@ -527,7 +527,20 @@ namespace PokerTests
 				new Card(Poker.Card.Suit.Diamond, Card.Value.Nine),
 				new Card(Poker.Card.Suit.Spade, Card.Value.Eight)
 			};
-			Assert.AreEqual(testHand.getHandScore(), 3);
+			Assert.AreEqual(testHand.getHandScore(), 3.43755625);
+		}
+		[Test]
+		public void test_getHandScore_returns2PointSomething_forTwoPair()
+		{
+			testHand.cards = new List<Card>{
+				new Card(Poker.Card.Suit.Club, Card.Value.Eight),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Eight),
+				new Card(Poker.Card.Suit.Heart, Card.Value.Six),
+				new Card(Poker.Card.Suit.Diamond, Card.Value.Six),
+				new Card(Poker.Card.Suit.Spade, Card.Value.Five)
+			};
+			Assert.Greater(testHand.getHandScore(), 2.50003750312);
+			Assert.Less(testHand.getHandScore(), 2.500037503129);
 		}
 	}
 

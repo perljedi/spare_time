@@ -230,29 +230,36 @@ namespace Poker
 			}
 		}
 
-		public float getHandScore ()
+		public double getHandScore ()
 		{
-			float score = 0;
+			double score = 0;
 			if (this.isFlush ()) {
 				if (this.isStraight ()) {
 					score = 8;
 				} else {
 					score = 5;
 				}
-				score += (float)this.getHighestCard().intValue/16;
+				score += (double)this.getHighestCard().intValue/16;
 			}else if(this.isFourOfAKind()){
 				score = 7;
-				score += (float)this.groupByValueAndSortByCount(cards)[0].Key/16;
+				score += (double)this.groupByValueAndSortByCount(cards)[0].Key/16;
+				score += (double)this.groupByValueAndSortByCount(cards)[1].Key/160000;
 			}else if(this.isFullHouse()){
 				score = 6;
-				score += (float)this.groupByValueAndSortByCount(cards)[0].Key/16;
+				score += (double)this.groupByValueAndSortByCount(cards)[0].Key/16;
+				score += (double)this.groupByValueAndSortByCount(cards)[1].Key/160000;
 			}else if(this.isStraight()){
 				score = 4;
-				score += (float)this.groupByValueAndSortByCount(cards)[0].Key/16;
+				score += (double)this.groupByValueAndSortByCount(cards)[0].Key/16;
 			}else if(this.isThreeOfAKind()){
 				score = 3;
+				score += (double)this.groupByValueAndSortByCount(cards)[0].Key/16;
+				score += (double)this.groupByValueAndSortByCount(cards)[1].Key/160000;
 			}else if(this.isTwoPair()){
-
+				score = 2;
+				score += (double)this.groupByValueAndSortByCount(cards)[0].Key/16;
+				score += (double)this.groupByValueAndSortByCount(cards)[1].Key/160000;
+				score += (double)this.groupByValueAndSortByCount(cards)[2].Key/1600000000;
 			}
 
 			return score;
